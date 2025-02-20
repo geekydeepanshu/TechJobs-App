@@ -4,10 +4,10 @@ import { jobUser } from "../models/user.model.js";
 
 export const SignUp = async (req, res) => {
     try {
-        const { firstname, lastname, email, password } = req.body;
+        const { firstname, lastname, email, password ,role} = req.body;
 
         // Check if all fields are provided
-        if (!firstname || !lastname || !email || !password) {
+        if (!firstname || !lastname || !email || !password  || !role) {
             return res.status(400).json({ success: false, message: "All fields are required" });
         }
 
@@ -26,6 +26,7 @@ export const SignUp = async (req, res) => {
             lastname,
             email,
             password: hashPassword,
+            role,
         });
 
         return res.status(201).json({ success: true, message: "Signup successful" });
@@ -40,10 +41,10 @@ export const SignUp = async (req, res) => {
 
 export const Login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password,role} = req.body;
 
         // Validate input fields
-        if (!email || !password) {
+        if (!email || !password || !role)  {
             return res.status(400).json({ success: false, message: "All fields are required" });
         }
 
@@ -59,6 +60,11 @@ export const Login = async (req, res) => {
 
         if (!isPasswordMatch) {
             return res.status(400).json({ success: false, message: "Email or password are wrong" });
+        }
+
+        // check role is correct or not
+        if(role != user.role) {
+            return res.status(400).json({message: "Account doesn't exit with current role",success:false})
         }
 
         const tokenData = {
