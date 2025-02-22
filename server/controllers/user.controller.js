@@ -17,7 +17,7 @@ export const SignUp = async (req, res) => {
             return res.status(400).json({ success: false, message: "User already exists" });
         }
 
-        // Hash the password
+        // Hash the password 
         const hashPassword = await bcrypt.hash(password, 10);
 
         // Create the new user in the database
@@ -73,10 +73,10 @@ export const Login = async (req, res) => {
 
         const token = await jwt.sign(tokenData,process.env.SECRET_KEY,{expiresIn: '1d'});
 
-         return res.status(200).cookie("token", token, {maxage: 1*24*60*60*1000,httpsOnly:true,samesite:'strict'}).json({
-            message:`Welcome Back ${user.firstname}`,
-            user,
-            success:true
+        return res.status(200).cookie("token",token,{maxAge:1*24*60*60*1000, httpsOnly:true, sameSite:"strict"}).json({
+            success:true,
+            message:`Welcome Back ${user.fullname}`,
+            user
          })
       
 
