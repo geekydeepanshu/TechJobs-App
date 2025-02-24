@@ -1,11 +1,12 @@
 import express from 'express';
 import dotenv from "dotenv"
 import cors from "cors"
-import bodyParser from 'body-parser';
+import fs from 'fs';
 import { ConnectDB } from './DB/db.js';
 import { router } from './routes/user.route.js';
 import { Jobrouter } from "./routes/job.route.js"
 import cookieParser from 'cookie-parser';
+import swaggerUi from "swagger-ui-express";     
 
 
 const app = express();
@@ -17,6 +18,12 @@ app.use(cookieParser());
 
 // Mongo DB connection
 ConnectDB();
+
+const swaggerDocument = JSON.parse(fs.readFileSync("./swagger.json", "utf-8"));
+
+// Setup Swagger
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+console.log("✅ Swagger API Docs available at: http://localhost:8000/api-docs");
 
 const port = process.env.PORT || 5000
 
