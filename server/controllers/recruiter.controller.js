@@ -1,27 +1,26 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { User } from "../models/user.model.js";
+import { recruiter } from "../models/recruiter.model.js";
 
-// register new user
-export const SignUp = async (req, res) => {
+// register recruiter
+export const recruiterSignUp = async (req, res) => {
 
     try {
 
-        const { firstname, lastname, email, password,role} = req.body;
+        const { companyName, email, password ,role } = req.body;
 
         // Check if user already exists 
-        const user = await User.findOne({ email });
+        const user = await recruiter.findOne({ email });
         if (user) {
             return res.status(400).json({ success: false, message: "User already exists" });
         }
-
+          
         // Hash the password 
         const hashPassword = await bcrypt.hash(password, 10);
 
         // Create the new user in the database
-        await User.create({
-            firstname,
-            lastname,
+        await recruiter.create({
+            companyName,
             email,
             password: hashPassword,
             role
@@ -34,13 +33,13 @@ export const SignUp = async (req, res) => {
         return res.status(500).json({ success: false, message: "Server error" });
     }
 };
-// Login user
-export const Login = async (req, res) => {
+// Login recruiter
+export const recruiterLogin = async (req, res) => {
     try {
         const { email, password} = req.body;
 
         // Find user by email
-        const user = await User.findOne({ email });
+        const user = await recruiter.findOne({ email });
         
         if (!user) {
             return res.status(400).json({ success: false, message: "Email or password are wrong" });
@@ -65,7 +64,7 @@ export const Login = async (req, res) => {
 
         return res.status(200).cookie("token",token,{maxAge:1*24*60*60*1000, httpsOnly:true, sameSite:"strict"}).json({
             success:true,
-            message:`Welcome Back ${user.firstname}`,
+            message:`Welcome Back ${user.companyName}`,
             user: userWithoutPassword
          })
       
@@ -75,8 +74,8 @@ export const Login = async (req, res) => {
         return res.status(500).json({ success: false, message: "Server error. Please try again later." });
     }
 };
-// LogOut user 
-export const logout = async (req, res) => {
+// LogOut recruiter
+export const recruiterlogout = async (req, res) => {
     try {
         return res.status(200).cookie("token","",{maxage:0}).json({
             success: true,
