@@ -4,6 +4,7 @@ import cors from "cors"
 import fs from 'fs';
 import { ConnectDB } from './DB/db.js';
 import { router } from './routes/user.route.js';
+import { recruiter } from './routes/recruiter.route.js'
 import cookieParser from 'cookie-parser';
 import swaggerUi from "swagger-ui-express";
 
@@ -27,6 +28,8 @@ const port = process.env.PORT || 5000
 
 //user routers
 app.use("/api/user",router);
+// recruiter router
+app.use("/api/recruiter",recruiter)
 
 app.get("/",(req,res) => {
     res.send("Server is ready");

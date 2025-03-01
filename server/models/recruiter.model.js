@@ -1,15 +1,11 @@
 import mongoose, { Schema } from "mongoose"
 
-const UserSchema = new mongoose.Schema({
+const recruiterSchema = new mongoose.Schema({
 
-    firstname: {
+    companyName: {
         type: String,
         required: true,
         unique: true
-    },
-    lastname: {
-        type: String,
-        required: true
     },
     email: {
         type: String,
@@ -23,10 +19,10 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ['jobseeker', 'recruiter'], // Define possible roles
-        default: 'jobseeker', // Default role is jobseeker
+        default: 'recruiter',
         required:true
     },
 
 },{timestamps: true})
 
-export const User = mongoose.model("User",UserSchema);
+export const recruiter = mongoose.model("recruiter",recruiterSchema);
