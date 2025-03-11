@@ -6,8 +6,8 @@ import { recruiterLogin, recruiterlogout, recruiterSignUp } from "../controllers
 
 const recruiter = express.Router();
 
-recruiter.post("/Recsignup",recruiterSignUpValidation,handleValidationError,recruiterSignUp);
-recruiter.post("/Reclogin",recruiterloginValidation,handleValidationError,recruiterLogin);
-recruiter.post("/Reclogout",authUser,recruiterlogout);
+recruiter.post("/signup",recruiterSignUpValidation,handleValidationError,recruiterSignUp);
+recruiter.post("/login",recruiterloginValidation,handleValidationError,recruiterLogin);
+recruiter.post("/logout",authUser,recruiterlogout);
 
 export { recruiter }

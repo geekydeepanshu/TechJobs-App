@@ -92,6 +92,78 @@
             "200": { "description": "Logout successful" }
           }
         }
+      },
+      "/api/recruiter/Recsignup": {
+        "post": {
+          "summary": "Register a recruiter",
+          "tags": ["Auth"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "CompanyName": { "type": "string" },
+                    "email": { "type": "string" },
+                    "password": { "type": "string" }
+                   }
+                 }
+                }
+            }
+          },
+          "responses": {
+            "201": { "description": "Recruiter registered successfully" },
+            "400": { "description": "Validation error" },
+            "500": { "description": "Server error" }
+          }
+        }
+      },
+      "/api/recruiter/Reclogin": {
+        "post": {
+          "summary": "Login recruiter",
+          "tags": ["Auth"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": { "type": "string" },
+                    "password": { "type": "string" }
+                   }
+                 }
+                }
+            }
+          },
+          "responses": {
+            "201": { "description": "Recruiter login successfully" },
+            "400": { "description": "Validation error" },
+            "500": { "description": "Server error" }
+          }
+        }
+      },
+      "/api/recruiter/Reclogout": {
+        "post": {
+          "summary": "Logout recruiter",
+          "tags": ["Auth"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                 }
+                }
+            }
+          },
+          "responses": {
+            "201": { "description": "Recruiter logOut successfully" },
+            "400": { "description": "Validation error" },
+            "500": { "description": "Server error" }
+          }
+        }
       }
     }
   }
