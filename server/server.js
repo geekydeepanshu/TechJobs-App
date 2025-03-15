@@ -7,6 +7,7 @@ import { router } from './routes/user.route.js';
 import { recruiter } from './routes/recruiter.route.js'
 import cookieParser from 'cookie-parser';
 import swaggerUi from "swagger-ui-express";
+import { Jobrouter } from './routes/job.route.js';
 
 const app = express();
 dotenv.config();
@@ -30,6 +31,8 @@ const port = process.env.PORT || 5000
 app.use("/api/user",router);
 // recruiter router
 app.use("/api/recruiter",recruiter)
+// Jobs routes
+app.use("/api/jobs",Jobrouter)
 
 app.get("/",(req,res) => {
     res.send("Server is ready");

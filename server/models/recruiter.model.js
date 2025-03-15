@@ -5,7 +5,6 @@ const recruiterSchema = new mongoose.Schema({
     companyName: {
         type: String,
         required: true,
-        unique: true
     },
     email: {
         type: String,

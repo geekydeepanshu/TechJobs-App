@@ -93,7 +93,7 @@
           }
         }
       },
-      "/api/recruiter/Recsignup": {
+      "/api/recruiter/signup": {
         "post": {
           "summary": "Register a recruiter",
           "tags": ["Auth"],
@@ -119,7 +119,7 @@
           }
         }
       },
-      "/api/recruiter/Reclogin": {
+      "/api/recruiter/login": {
         "post": {
           "summary": "Login recruiter",
           "tags": ["Auth"],
@@ -144,7 +144,7 @@
           }
         }
       },
-      "/api/recruiter/Reclogout": {
+      "/api/recruiter/logout": {
         "post": {
           "summary": "Logout recruiter",
           "tags": ["Auth"],

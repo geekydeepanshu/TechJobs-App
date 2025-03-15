@@ -7,7 +7,7 @@ export const SignUp = async (req, res) => {
 
     try {
 
-        const { firstname, lastname, email, password,role} = req.body;
+        const { firstname, lastname, email, password, role } = req.body;
 
         // Check if user already exists 
         const user = await User.findOne({ email });
@@ -37,11 +37,11 @@ export const SignUp = async (req, res) => {
 // Login user
 export const Login = async (req, res) => {
     try {
-        const { email, password} = req.body;
+        const { email, password } = req.body;
 
         // Find user by email
         const user = await User.findOne({ email });
-        
+
         if (!user) {
             return res.status(400).json({ success: false, message: "Email or password are wrong" });
         }
@@ -54,21 +54,21 @@ export const Login = async (req, res) => {
         }
 
         const tokenData = {
-            userId:user._id
+            userId: user._id
         }
 
-        const token = await jwt.sign(tokenData,process.env.SECRET_KEY,{expiresIn: '1d'});
+        const token = await jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: '1d' });
 
         // Remove the password 
         const userWithoutPassword = user.toObject();
         delete userWithoutPassword.password;
 
-        return res.status(200).cookie("token",token,{maxAge:1*24*60*60*1000, httpsOnly:true, sameSite:"strict"}).json({
-            success:true,
-            message:`Welcome Back ${user.firstname}`,
+        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true }).json({
+            success: true,
+            message: `Welcome Back ${user.firstname}`,
             user: userWithoutPassword
-         })
-      
+        })
+
 
     } catch (error) {
         console.log("Error:", error);
@@ -78,11 +78,11 @@ export const Login = async (req, res) => {
 // LogOut user 
 export const logout = async (req, res) => {
     try {
-        return res.status(200).cookie("token","",{maxage:0}).json({
+        return res.status(200).cookie("token", "", { maxage: 0 }).json({
             success: true,
             message: "Successfully logged out."
         });
-        
+
     } catch (error) {
         console.log("Error:", error);
         return res.status(500).json({ success: false, message: "Server error. Please try again later." });
