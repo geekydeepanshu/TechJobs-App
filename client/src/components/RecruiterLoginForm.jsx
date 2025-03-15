@@ -33,7 +33,7 @@ function RecruiterLogicForm(){
                 if(error.status>=400 && error.status<=499)
                     toast.error(error.response?.data?.message,toastOptions);
                 else
-                    toast.error(error.message);
+                    toast.error(error.response?.data?.message || error.message,toastOptions);
             }
      
         
