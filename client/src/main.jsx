@@ -8,13 +8,15 @@ import {
   RecruiterLoginPage,
   RecruiterRegistrationPage,
   CandidateLoginPage,
-  CandidateRegistrationPage
+  CandidateRegistrationPage,
+  AddJobPage
 } from "./pages"
 import AuthLayout from './AuthLayout.jsx';
 import { store } from './store/store.js';
 import {Provider} from 'react-redux';
 import { toastOptions } from './utils/index.js';
 import RecruiterLayout from './RecruiterLayout.jsx';
+import Navbar from './components/navbar.jsx';
 
 
 
@@ -32,7 +34,10 @@ createRoot(document.getElementById('root')).render(
           <Route path="recruiter-login" element={<RecruiterLoginPage/>}/>
           <Route path="recruiter-registration" element={<RecruiterRegistrationPage/>}/>
         </Route>
-        <Route path="/recruiter-dashboard" element={<RecruiterLayout/>}/>
+        <Route path="/recruiter-dashboard" element={<RecruiterLayout/>}>
+          <Route index element={<AddJobPage/>}/>
+        </Route>
+        <Route path='test' element={<Navbar/>}/>
       </Routes>
     </BrowserRouter>
     </Provider>
