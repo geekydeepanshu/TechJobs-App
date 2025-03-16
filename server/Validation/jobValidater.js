@@ -12,7 +12,7 @@ export const JobValidation = [
   body('category')
     .notEmpty().withMessage('Please provide a category')
     .trim(), 
-
+    
   body('salary')
     .isNumeric().withMessage('Salary must be a valid number')
     .custom(value => value > 0).withMessage('Salary must be greater than 0'),

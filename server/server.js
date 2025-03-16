@@ -10,7 +10,7 @@ import swaggerUi from "swagger-ui-express";
 import { Jobrouter } from './routes/job.route.js';
 
 const app = express();
-dotenv.config();
+dotenv.config(); 
 app.use(express.json()); // Handles JSON body parsing
 app.use(express.urlencoded({ extended: true })); // Handles URL-encoded data
 app.use(cors());

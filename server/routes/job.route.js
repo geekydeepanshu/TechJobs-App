@@ -12,4 +12,4 @@ Jobrouter.put("/update/:id",authUser,updateJob);
 Jobrouter.delete("/delete/:id",authUser,deleteJob);
 
 
-export { Jobrouter }
+export { Jobrouter } 
