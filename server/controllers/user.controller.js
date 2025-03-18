@@ -66,7 +66,8 @@ export const Login = async (req, res) => {
         return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true }).json({
             success: true,
             message: `Welcome Back ${user.firstname}`,
-            user: userWithoutPassword
+            user: userWithoutPassword,
+            token
         })
 
 
@@ -88,4 +89,3 @@ export const logout = async (req, res) => {
         return res.status(500).json({ success: false, message: "Server error. Please try again later." });
     }
 };
-
