@@ -107,4 +107,4 @@ export const deleteJob = async (req, res) => {
             message: "Failed to delete the job",
         });
     }
-}; 
+};

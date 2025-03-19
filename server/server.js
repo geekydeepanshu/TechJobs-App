@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 import swaggerUi from "swagger-ui-express";
 import { Jobrouter } from './routes/job.route.js';
 
+
 const app = express();
 dotenv.config(); 
 app.use(express.json()); // Handles JSON body parsing

@@ -11,7 +11,7 @@ export const authUser = (req, res, next) => {
 
         // Verify token
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        req.userId = decoded.userId; // Store userId in req object
+        req.userId = decoded.userId; // Store userId req object
 
         next();
     } catch (error) {

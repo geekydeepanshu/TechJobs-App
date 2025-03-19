@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
+
 const JobSchema = new mongoose.Schema(
   {
     title: {
