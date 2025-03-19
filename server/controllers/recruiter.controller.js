@@ -62,10 +62,11 @@ export const recruiterLogin = async (req, res) => {
         const userWithoutPassword = user.toObject();
         delete userWithoutPassword.password;
 
-        return res.status(200).cookie("token",token,{maxAge:1*24*60*60*1000, httpsOnly:true, sameSite:"strict"}).json({
+        return res.status(200).json({    //.cookie("token",token,{maxAge:1*24*60*60*1000, httpsOnly:true, sameSite:"strict"})  
             success:true,
             message:`Welcome Back ${user.companyName}`,
-            user: userWithoutPassword
+            user: userWithoutPassword,
+            token
          })
       
 

@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
+import nodemailer from "nodemailer"
 
 // register new user
 export const SignUp = async (req, res) => {
@@ -63,7 +64,7 @@ export const Login = async (req, res) => {
         const userWithoutPassword = user.toObject();
         delete userWithoutPassword.password;
 
-        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true }).json({
+        return res.status(200).json({
             success: true,
             message: `Welcome Back ${user.firstname}`,
             user: userWithoutPassword,
