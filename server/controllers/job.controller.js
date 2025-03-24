@@ -3,7 +3,7 @@ import { Job } from "../models/job.model.js";
 // create a new job
 export const postJob = async (req, res) => {
     try {
-        const { title, description, category, salary, location, level } = req.body; 
+        const { title, description, category, salary, location, level , recruiter_id } = req.body; 
         const userId = req.id;  
 
         // Create the job
@@ -14,6 +14,7 @@ export const postJob = async (req, res) => {
             salary: Number(salary),
             location,
             level,
+            recruiter_id,
             createdBy: userId, 
         });
 
