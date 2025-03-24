@@ -27,6 +27,15 @@ const JobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    isVisible: { 
+      type: Boolean, 
+      default: true
+     }, // New field: true = show, false = hide
+    recruiter_id: { 
+       type: mongoose.Schema.Types.ObjectId,
+       ref: 'recruiter', 
+       required: true
+      },
     created_by: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User", // Reference to the 'User' model

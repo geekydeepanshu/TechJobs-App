@@ -22,6 +22,6 @@ export const JobValidation = [
     .trim(), 
 
   body('level')
-    .isIn(['junior','mid', 'senior']).withMessage('Level must be one of the following: junior, mid, senior')
+    .isIn(['junior','medium', 'senior']).withMessage('Level must be one of the following: junior, mid, senior')
     .notEmpty().withMessage('Please provide a level')
 ]
