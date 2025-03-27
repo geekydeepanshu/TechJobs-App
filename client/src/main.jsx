@@ -9,11 +9,11 @@ import {
   RecruiterRegistrationPage,
   CandidateLoginPage,
   CandidateRegistrationPage
+
 } from "./pages"
 import AuthLayout from './AuthLayout.jsx';
 import { store } from './store/store.js';
 import {Provider} from 'react-redux';
-import { toastOptions } from './utils/index.js';
 import RecruiterLayout from './RecruiterLayout.jsx';
 
 
@@ -33,6 +33,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="recruiter-registration" element={<RecruiterRegistrationPage/>}/>
         </Route>
         <Route path="/recruiter-dashboard" element={<RecruiterLayout/>}/>
+
       </Routes>
     </BrowserRouter>
     </Provider>

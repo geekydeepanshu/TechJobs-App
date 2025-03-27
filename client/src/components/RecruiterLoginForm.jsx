@@ -5,16 +5,22 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { toastOptions } from "../utils";
+import { assets } from "../assets/assets";
+import { useState } from "react";
 
 
 function RecruiterLogicForm(){
     const {register, handleSubmit, formState:{errors}} = useForm();
+    const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const showPasswordHandler = ()=>{
+        setShowPassword((prevState)=>!prevState)
+    }
     const submitHandler = async({email,password})=>{
         try {
             console.log(email,password)
-             const response =  await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/recruiter/Reclogin`,
+             const response =  await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/recruiter/login`,
             {
                 email,
                 password
@@ -22,7 +28,7 @@ function RecruiterLogicForm(){
             console.log("Response",response)
             if(response.status==200){
                 console.log(response);
-                dispatch(login(response.data.user))
+                dispatch(login({role:response.data?.user?.role, userInfo:response.data?.user, token:response.data?.token}))
                 toast.success(response.data.message,toastOptions);
                 navigate("/recruiter-dashboard");
             }
@@ -64,13 +70,16 @@ return (
             />
             {errors.email && (<p className="error-msg">{errors.email?.message}</p>)}
             <label className="input-label" htmlFor={"password"} >Password*</label>
+        <div className="inline-block border-1 border-gray-300 rounded-md px-3 h-9 w-92 relative py-1">
         <input 
-            type="password"
+            type={showPassword?"text":"password"}
             id="password"
-            className="input-feild-text"
+            className="inline-block focus:ring-0 focus:outline-0"
             placeholder="enter password" 
             {...register("password",{required:"password required"
-            })}/>    
+            })}/> 
+            <button className="inline-block absolute right-3" onClick={showPasswordHandler} type="button"><img className="h-6 w-6 inline-block" src={showPassword?assets.hide_password_icon:assets.show_password_icon}/></button>   
+        </div>
            </div>  
          <p>Forgot Password?</p>
          <p className="hr-line"></p>   

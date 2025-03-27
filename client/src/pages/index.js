@@ -5,7 +5,6 @@ import RecruiterRegistrationPage from "./RecruiterRegistrationPage";
 
 
 
-
 export {
     CandidateLoginPage,
     CandidateRegistrationPage,
