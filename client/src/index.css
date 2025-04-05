@@ -1,1 +1,103 @@
 @import "tailwindcss";
+
+
+.page-wrapper{
+    @apply  w-screen h-screen flex items-center justify-center bg-white dark:bg-gray-900 px-4 sm:px-6 lg:px-8;
+}
+
+.form-wrapper{
+    @apply mx-auto max-w-md   w-full border-[1.5px] rounded-2xl px-8 py-6  shadow-sm border-black  bg-white box-border;
+}
+.heading-container{
+    @apply mb-4;
+}
+.main-heading{
+    @apply text-3xl font-bold text-center text-black dark:text-green-400;
+}
+
+.sub-heading{
+    @apply mt-[5px] text-center text-[13px] text-gray-500 dark:text-gray-300;
+}
+
+.form-container{
+    @apply mt-8 space-y-6;
+}
+
+.hr-line{
+    @apply max-w-6/7 mx-auto border-b-[1.5px] border-gray-300 rounded-4xl;
+}
+
+.input-feild-group{
+    @apply space-y-2 mb-8;
+}
+
+.input-horizontal-group{
+    @apply space-y-2;
+}
+
+.input-label{
+    @apply block text-sm font-medium text-black dark:text-gray-300;
+}
+
+.input-feild-text{
+    @apply 
+    appearance-none
+    mt-2  
+    relative 
+    block 
+    w-full 
+    px-3 
+    py-2 
+    border 
+    rounded-md 
+    sm:text-sm
+    focus:outline-none 
+    focus:z-10 
+    border-gray-300 
+    dark:border-gray-700 
+    placeholder-gray-500 
+    dark:placeholder-gray-400 
+    text-gray-900 
+    dark:text-gray-100 
+    bg-gray-50 
+    dark:bg-gray-800 
+    focus:ring-black 
+    focus:border-black ;
+}
+
+.error-msg{
+    @apply text-red-600 text-xs ;
+}
+
+.auth-navigation-msg{
+    @apply mt-2 text-center text-sm text-gray-500 dark:text-gray-300;
+}
+
+.auth-navigation-link{
+    @apply  text-black dark:text-green-400 font-semibold;
+}
+
+.form-submit-button{
+    @apply  
+    relative 
+    w-full 
+    flex 
+    justify-center 
+    py-2 
+    px-4 
+    border 
+    border-gray-300 
+    dark:border-gray-700 
+    text-sm 
+    font-medium 
+    rounded-md 
+    text-white 
+    dark:text-gray-100 
+    bg-black 
+    dark:bg-gray-800 
+    dark:hover:bg-gray-700 
+    focus:outline-none 
+    focus:ring-2 
+    focus:ring-offset-2 
+    focus:ring-black;
+}
