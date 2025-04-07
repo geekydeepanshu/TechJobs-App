@@ -5,7 +5,7 @@ import { Link } from "react-router";
 function Navbar(){
     const {isLoggedIn, role, userInfo} =  useSelector(state=>state.auth);
 return (
-    <nav className="flex flex-row justify-between items-center mx-3 pt-2">
+    <nav className="flex flex-row justify-between items-center mx-3 pt-2 pb-1 border-b-1 border-b-gray-300">
         <div className="inline-block">
             <img src={assets.logo} alt="tech jobs logo" />
         </div>

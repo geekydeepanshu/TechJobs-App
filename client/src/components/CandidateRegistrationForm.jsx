@@ -3,10 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { toastOptions } from "../utils";
+import { useState } from "react";
+import { assets } from "../assets/assets";
 
 function CandidateRegistrationForm(){
   const {register, handleSubmit, formState:{ errors }} = useForm();
+  const [showPassword, setShowPassword] = useState(false);
   let navigate = useNavigate();
+  const showPasswordHandler = ()=>{
+     setShowPassword((prevState)=>!prevState);
+  }
 
   const submitHandler = async(data)=> {
     const {firstName, lastName, email, password} = data;
@@ -91,10 +97,11 @@ return (
             })}/>
             {errors.email && (<p className="error-msg">{errors.email?.message}</p>)}
             <label className="input-label" htmlFor={"password"} >Password*</label>
+            <div className="inline-block border-1 border-gray-300 rounded-md px-3 h-9 w-92 relative py-1">
             <input
-            type="password"
+            type={showPassword?"text":"password"} 
             id="password"
-            className="input-feild-text"
+            className="inline-block focus:ring-0 focus:outline-0 w-80"
             placeholder="enter your password"
             {...register("password",{required:"password required !",
                 maxLength:{value:16,message:"Password should not excced 16 characters"},
@@ -106,6 +113,8 @@ return (
                 }
                
             })}/>
+            <button className="inline-block absolute right-3" onClick={showPasswordHandler} type="button"><img className="h-6 w-6 inline-block" src={showPassword?assets.hide_password_icon:assets.show_password_icon}/></button>   
+            </div>
             {errors.password && (<p className="error-msg">{errors.password?.message}</p>)}
         </div>
         <p className="hr-line"></p>

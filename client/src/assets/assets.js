@@ -27,12 +27,17 @@ import add_icon from './add_icon.svg'
 import profile_upload_icon from './profile_upload_icon.svg'
 import person_tick_icon from './person_tick_icon.svg'
 import resume_download_icon from './resume_download_icon.svg'
-import delete_icon from './delete_icon.svg'
 import email_icon from './email_icon.svg'
 import lock_icon from './lock_icon.svg'
 import samsung_logo from './samsung_logo.png'
 import adobe_logo from './adobe_logo.png'
 import amazon_logo from './amazon_logo.png'
+import image_upload from './upload-photo.svg'
+import show_password_icon from './eye-password-show.svg'
+import hide_password_icon from './eye-password-hide.svg'
+import bin_icon from './bin_icon.svg'
+import delete_icon from './delete_icon.svg'
+import edit_icon_with_underline from './edit-icon-with-underline.svg'
 
 export const assets = {
     logo,
@@ -69,7 +74,12 @@ export const assets = {
     lock_icon,
     samsung_logo,
     adobe_logo,
-    amazon_logo
+    amazon_logo,
+    image_upload,
+    hide_password_icon,
+    show_password_icon,
+    bin_icon,
+    edit_icon_with_underline
 }
 
 export const JobCategories = [

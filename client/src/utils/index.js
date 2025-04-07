@@ -9,5 +9,20 @@ const toastOptions = {
     theme: "light"
 }
 
+const dateToString = (date) => {
+    const givenDate = new Date(date);
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return `${months[givenDate.getMonth()]} ${givenDate.getDate()}, ${givenDate.getFullYear()}`;
+}
 
-export { toastOptions };
+
+
+const isObjectEmpty = (obj) => {
+    if (Object.keys(obj).length === 0) {
+        return true;
+    }
+    return false;
+}
+
+
+export { toastOptions, dateToString, isObjectEmpty };

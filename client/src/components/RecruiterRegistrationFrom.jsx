@@ -5,13 +5,19 @@ import { useDispatch } from "react-redux";
 import { login } from "../store/features/auth/authSlice";
 import {toast} from "react-toastify";
 import {toastOptions} from "../utils/index";
+import { useState } from "react";
+import { assets } from "../assets/assets";
 
 function RecruiterRegistrationForm (){
     const {register, handleSubmit, formState:{errors}} = useForm();
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const showPasswordHandler = ()=>{
+        setShowPassword((prevState)=>!prevState)
+    }
     const submitHandler = async(data)=>{
         try{
-            const response =  await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/recruiter/Recsignup`,{
+            const response =  await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/recruiter/signup`,{
             companyName:data.company,
             email:data.email,
             password:data.password,
@@ -63,10 +69,11 @@ return (
             })}/>
             {errors.email && (<p className="error-msg">{errors.email?.message}</p>)}
             <label className="input-label" htmlFor={"password"} >Password*</label>
+            <div className="inline-block border-1 border-gray-300  rounded-md px-3 h-9 w-92 relative py-1">
             <input
-            type="password"
+            type={showPassword?"text":"password"}
             id="password"
-            className="input-feild-text"
+            className="inline-block focus:ring-0 focus:outline-0 w-80 text-sm"
             placeholder="enter password"
             {...register("password",{
                 required:"password required !",
@@ -78,6 +85,8 @@ return (
                     hasSpecialCharacter: value=>/[!@#$%^&*(),.?":{}|<>]/.test(value) || "Password must contain atleast one special character",
                 }
             })}/>
+            <button className="inline-block absolute right-3" onClick={showPasswordHandler} type="button"><img className="h-6 w-6 inline-block" src={showPassword?assets.hide_password_icon:assets.show_password_icon}/></button>   
+            </div>
             {errors.password && (<p className="error-msg">{errors.password?.message}</p>)}
         </div>
         <p className="hr-line"></p>

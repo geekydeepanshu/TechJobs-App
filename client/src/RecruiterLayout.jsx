@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Outlet } from "react-router";
+import { useNavigate, Outlet, NavLink } from "react-router";
 import { toast } from "react-toastify";
 import { toastOptions } from "./utils";
 import { logout } from "./store/features/auth/authSlice";
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
+import { assets } from "./assets/assets";
+import { Footer } from "./components";
 
 function RecruiterLayout(){
     const {role, isLoggedIn} = useSelector((state)=>state.auth)
@@ -26,41 +28,42 @@ function RecruiterLayout(){
             
        </h1> */}
        <Navbar/>
-       <div className="flex">
-        <section className="flex-1 w-2/8">
-          <ul>
-            <li>
-              <button
-                
-                className="block py-2 px-4 text-lg hover:bg-gray-700 rounded"
+       <div className="flex h-screen">
+        <section className="w-1/5 border-r-1 border-r-gray-300">
+          <ul className="py-2">
+            <li className="mx-2">
+              <img className="inline-block mx-2" src={assets.add_icon}/>
+              <NavLink
+                to={"add-job"}
+                className={({isActive})=>`${isActive?"text-blue-400":""} inline-block py-1 px-2 text-lg  rounded`}
               >
                 Add Job
-              </button>
+              </NavLink>
             </li>
-            <li>
-              <button
-               
-                className="block py-2 px-4 text-lg hover:bg-gray-700 rounded"
+            <li className="mx-2">
+              <img className="inline-block mx-2" src={assets.home_icon} alt="" />
+            <NavLink
+                to={"manage-jobs"}
+                className={({isActive})=>`${isActive?"text-blue-400":""} inline-block py-1 px-2 text-lg rounded`}
               >
                 Manage Job
-              </button>
+              </NavLink>
             </li>
-            <li>
-              <button
-                
-                className="block py-2 px-4 text-lg hover:bg-gray-700 rounded"
+            <li className="mx-2">
+              <img className="inline-block mx-2" src={assets.person_tick_icon}/>
+            <NavLink
+                to={"view-applications"}
+                className={({isActive})=>`${isActive?"text-blue-400":""} inline-block py-1 px-2 text-lg  rounded`}
               >
                 View Application
-              </button>
+              </NavLink>
             </li>
           </ul>
         </section>
-       <div className="w-6/8 px-72">
+       <div className="">
         <Outlet/>
        </div>
        </div>
-        
-       
        </>
     )
 }

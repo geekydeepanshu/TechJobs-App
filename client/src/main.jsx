@@ -9,14 +9,19 @@ import {
   RecruiterRegistrationPage,
   CandidateLoginPage,
   CandidateRegistrationPage,
-  AddJobPage
+  AddJobPage,
+  ManageJobsPage,
+  ViewApplicationPage,
+  UploadCompanyLogoPage,
+  JobDetailViewPage,
+  JobEditPage
 } from "./pages"
 import AuthLayout from './AuthLayout.jsx';
 import { store } from './store/store.js';
 import {Provider} from 'react-redux';
 import { toastOptions } from './utils/index.js';
 import RecruiterLayout from './RecruiterLayout.jsx';
-import Navbar from './components/navbar.jsx';
+import {JobCard,JobListings, JobTitleBanner, SearchBanner, SearchBox} from './components';
 
 
 
@@ -34,10 +39,15 @@ createRoot(document.getElementById('root')).render(
           <Route path="recruiter-login" element={<RecruiterLoginPage/>}/>
           <Route path="recruiter-registration" element={<RecruiterRegistrationPage/>}/>
         </Route>
+        <Route path='/view-job/:jobId' element={<JobDetailViewPage/>}/>
         <Route path="/recruiter-dashboard" element={<RecruiterLayout/>}>
-          <Route index element={<AddJobPage/>}/>
+          <Route index path='add-job' element={<AddJobPage/>}/>
+          <Route path='manage-jobs' element={<ManageJobsPage/>}/>
+          <Route path='edit-job/:jobId' element={<JobEditPage/>}/>
+          <Route path='view-applications' element={<ViewApplicationPage/>}/>
+          
         </Route>
-        <Route path='test' element={<Navbar/>}/>
+        <Route path='test' element={<JobDetailViewPage/>}/>
       </Routes>
     </BrowserRouter>
     </Provider>
