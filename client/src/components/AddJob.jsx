@@ -6,11 +6,13 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { isObjectEmpty, toastOptions } from "../utils";
 import { useNavigate } from "react-router";
+import { useAddJobMutation } from "../store/features/api/apiSlice";
 
 
 
 function AddJobForm({job={}}){
-    console.log("job",job);
+    const [addJob, addJobProps] = useAddJobMutation();
+    // console.log(fn)
     const quillRef = useRef();
     const { userInfo,token } = useSelector(state=>state.auth);
     const navigate = useNavigate();
@@ -41,21 +43,55 @@ function AddJobForm({job={}}){
     const submitHandler = async(data)=>{
         // console.log(data)
         // console.log("Quill Ref:",quillRef.current?.getSemanticHTML())
-        if(post){
-            try{
-                // const response = axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/jobs/edit-job/${job._id}`)
-                console.log(data)
-            }
-            catch(error){
-                if(error.response.status>=400 && error.response.satus <=499)
-                    toast.error(error.response?.data?.message);
-                else    
-                    toast.error(error.response?.message)
-            }
-        }
-        else{
-            try {
-            const response  = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/jobs/postjob`,{
+        // if(isObjectEmpty(job)){
+        //     try{
+        //         // const response = axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/jobs/edit-job/${job._id}`)
+        //         console.log(data)
+        //     }
+        //     catch(error){
+        //         if(error.response.status>=400 && error.response.satus <=499)
+        //             toast.error(error.response?.data?.message);
+        //         else    
+        //             toast.error(error.response?.message)
+        //     }
+        // }
+        // else{
+            // try {
+        //     const response  = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/jobs/postjob`,{
+        //         title:data.jobTitle,
+        //         description:data.jobDescription,
+        //         category:data.jobCategory,
+        //         salary:data.jobSalary,
+        //         location:data.jobLocation,
+        //         level:data.jobLevel,
+        //         createdBy:userInfo
+
+        //     },
+        // {
+        //     headers:{ Authorization: `Bearer ${token}`}
+        // });
+
+
+        // // success toast
+        // // navigate to Manage Jobs
+        // // console.log(response);
+        // if(response.status==201){
+        //     toast.success(response.data?.message,toastOptions);
+        //     navigate("/recruiter-dashboard/manage-jobs");
+        // }
+        // else{
+        //     toast.success(response.statusText);
+        // }
+        // } catch (error) {
+        //     // console.log("Error",error);
+        //     if(error.response.status>=400 && error.response.satus <=499)
+        //         toast.error(error.response?.data?.message);
+        //     else    
+        //         toast.error(error.response?.message)
+        //     // error toast
+        // }
+        console.log("Add Job Token: ",token)
+             const response =  addJob({
                 title:data.jobTitle,
                 description:data.jobDescription,
                 category:data.jobCategory,
@@ -64,28 +100,10 @@ function AddJobForm({job={}}){
                 level:data.jobLevel,
                 createdBy:userInfo
 
-            },
-        {
-            headers:{ Authorization: `Bearer ${token}`}
-        });
-        // success toast
-        // navigate to Manage Jobs
-        // console.log(response);
-        if(response.status==201){
-            toast.success(response.data?.message,toastOptions);
-            navigate("/recruiter-dashboard/manage-jobs");
-        }
-        else{
-            toast.success(response.statusText);
-        }
-        } catch (error) {
-            // console.log("Error",error);
-            if(error.response.status>=400 && error.response.satus <=499)
-                toast.error(error.response?.data?.message);
-            else    
-                toast.error(error.response?.message)
-            // error toast
-        }}
+            },token)
+
+            console.log(response,addJobProps)
+    // }
         
         
     }

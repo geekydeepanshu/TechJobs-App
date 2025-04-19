@@ -5,18 +5,17 @@ function JobDetailView({job}){
       
     return (
         <div className="mx-auto w-screen px-3">
-        <div className="flex justify-between items-start ">
-            <div className="w-10/12 text-wrap">
+        <div className="container mx-auto flex justify-between items-start ">
+            <div className="w-9/12 text-wrap">
                 <h2 className="my-2 text-xl font-bold">Job Description</h2>
                 <p className="w-[520px]">
-                    {parse(job.description)}
+                    { parse (job.description)}
                 </p>
             </div>
-            <section className="w-2/12">
+            <section className="w-3/12">
                 <h2>More jobs from Google</h2>
-                <JobCard/>
-                <JobCard/>
-                <JobCard/>
+                <JobCard />
+                
             </section>
         </div>
         </div>

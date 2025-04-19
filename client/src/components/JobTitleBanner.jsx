@@ -1,8 +1,8 @@
 import {assets} from "../assets/assets";
 
-function JobTitleBanner({job}){
+function JobTitleBanner({job={}}){
     return (
-    <div className="w-11/12 h-56 border-1 mx-auto border-blue-400 bg-blue-50 rounded-md  p-10 flex justify-between items-center box-border my-4">
+    <div className="container w-11/12 h-56 border-1 mx-auto border-blue-400 bg-blue-50 rounded-md  p-10 flex justify-between items-center box-border my-4">
         <div className="flex items-center">
             <div className="h-28 w-28 bg-white border-1 border-gray-300 rounded-xl py-9 px-2 mr-5 ">
                 <img className="h-8" src={assets.accenture_logo} alt="company logo" />

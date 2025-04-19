@@ -7,7 +7,7 @@ function SearchBox(){
         console.log(data);
     }
     return (
-        <form onSubmit={handleSubmit(submitHandler)} className="text-black mx-auto h-12 w-3/7 space-x-2 rounded-xl flex justify-between items-center px-2 bg-white">
+        <form onSubmit={handleSubmit(submitHandler)} className="text-black mx-auto h-12 w-3/7 space-x-2 rounded-md flex justify-between items-center px-2 bg-white">
             <div className="flex items-center">
                 <img className="h-5" src={assets.search_icon} alt="search icon" />
                 <input

@@ -8,6 +8,7 @@ import ViewApplicationPage from "./ViewApplicationsPage";
 import UploadCompanyLogoPage from "./UploadCompanyLogoPage";
 import JobDetailViewPage from "./JobDetailViewPage";
 import JobEditPage from "./JobEditPage";
+import LandingPage from "./LandingPage";
 
 
 
@@ -22,5 +23,6 @@ export {
     ViewApplicationPage,
     UploadCompanyLogoPage,
     JobDetailViewPage,
-    JobEditPage
+    JobEditPage,
+    LandingPage
 }

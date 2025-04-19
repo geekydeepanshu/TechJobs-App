@@ -14,24 +14,25 @@ import {
   ViewApplicationPage,
   UploadCompanyLogoPage,
   JobDetailViewPage,
-  JobEditPage
+  JobEditPage,
+  LandingPage
 } from "./pages"
 import AuthLayout from './AuthLayout.jsx';
 import { store } from './store/store.js';
 import {Provider} from 'react-redux';
 import { toastOptions } from './utils/index.js';
 import RecruiterLayout from './RecruiterLayout.jsx';
-import {JobCard,JobListings, JobTitleBanner, SearchBanner, SearchBox} from './components';
-
+import {JobCard,JobFilterOptions,JobListings, JobTitleBanner, SearchBanner, SearchBox} from './components';
 
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-    <BrowserRouter>
+        <BrowserRouter>
       <Routes>
-        <Route index element={<AppLayout/>}>
+        <Route path='/' element={<AppLayout/>}>
+          <Route index element={<LandingPage/>} />
         </Route>
         <Route element={<AuthLayout/>}>
           <Route path="user-login" element={<CandidateLoginPage/>}/>
@@ -47,9 +48,9 @@ createRoot(document.getElementById('root')).render(
           <Route path='view-applications' element={<ViewApplicationPage/>}/>
           
         </Route>
-        <Route path='test' element={<JobDetailViewPage/>}/>
+        <Route path='test' element={<JobFilterOptions/>}/>
       </Routes>
-    </BrowserRouter>
+        </BrowserRouter>
     </Provider>
     <ToastContainer/>
   </StrictMode>,

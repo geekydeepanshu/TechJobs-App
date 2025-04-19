@@ -17,6 +17,7 @@ import JobTitleBanner from "./JobTitleBanner";
 import JobDetailView from "./JobDetailView";
 import Navbar from "./Navbar";
 import EditJob from "./EditJob";
+import JobFilterOptions from "./JobFiltersOption";
 
 
 
@@ -39,5 +40,6 @@ export {
     JobTitleBanner,
     JobDetailView,
     Navbar,
-    EditJob
+    EditJob,
+    JobFilterOptions
 }
