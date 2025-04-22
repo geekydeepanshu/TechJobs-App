@@ -6,6 +6,9 @@ const recruiterSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    companyLogo: { 
+        type: String 
+    }, // Logo ka URL ya path store karne ke liye
     email: {
         type: String,
         required: true,

@@ -36,10 +36,6 @@ const JobSchema = new mongoose.Schema(
        ref: 'recruiter', 
        required: true
       },
-    created_by: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to the 'User' model
-    },
   },
   { timestamps: true } // Automatically creates 'createdAt' and 'updatedAt' fields
 );

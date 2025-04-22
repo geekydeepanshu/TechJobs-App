@@ -1,4 +1,5 @@
 import { Job } from "../models/job.model.js";
+import { Application } from "../models/Application.model.js";
 
 // create a new job
 export const postJob = async (req, res) => {
@@ -109,3 +110,44 @@ export const deleteJob = async (req, res) => {
         });
     }
 };
+//Apply jobs
+export const Applyapplication = async (req, res) => {
+    try {
+       const { userId, jobId } = req.body;
+ 
+       // Validate required fields
+       if (!userId || !jobId) {
+          return res.status(400).json({
+             success: false,
+             message: 'Both userId and jobId are required.',
+          });
+       }
+ 
+       // Check if the user has already applied for the job
+       const existingApplication = await Application.findOne({ userId, jobId });
+       if (existingApplication) {
+          return res.status(400).json({
+             success: false,
+             message: 'You have already applied for this job.',
+          });
+       }
+ 
+       // Create and save new application
+       const application = new Application({
+          userId,
+          jobId,
+       });
+ 
+       await application.save();
+       return res.status(201).json({
+          success: true,
+          message: 'Application submitted successfully.',
+       });
+    } catch (error) {
+       console.error('Error applying for job:', error);
+       return res.status(500).json({
+          success: false,
+          message: 'An error occurred while processing your application. Please try again later.',
+       });
+    }
+ };

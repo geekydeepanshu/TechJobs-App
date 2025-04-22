@@ -3,20 +3,21 @@ import jwt from "jsonwebtoken";
 import { recruiter } from "../models/recruiter.model.js";
 import mongoose from "mongoose";
 import { Job } from "../models/job.model.js";
- 
+
 // register recruiter
 export const recruiterSignUp = async (req, res) => {
 
     try {
 
-        const { companyName, email, password ,role } = req.body;
+        const { companyName, email, password, role } = req.body;
+        const companyLogo = req.file ? `/uploads/${req.file.filename}` : null; // Sirf path save karo
 
         // Check if user already exists 
         const user = await recruiter.findOne({ email });
         if (user) {
             return res.status(400).json({ success: false, message: "User already exists" });
         }
-          
+
         // Hash the password 
         const hashPassword = await bcrypt.hash(password, 10);
 
@@ -25,7 +26,8 @@ export const recruiterSignUp = async (req, res) => {
             companyName,
             email,
             password: hashPassword,
-            role
+            role,
+            companyLogo
         });
 
         return res.status(201).json({ success: true, message: "Signup successful" });
@@ -38,11 +40,11 @@ export const recruiterSignUp = async (req, res) => {
 // Login recruiter
 export const recruiterLogin = async (req, res) => {
     try {
-        const { email, password} = req.body;
+        const { email, password } = req.body;
 
         // Find user by email
         const user = await recruiter.findOne({ email });
-        
+
         if (!user) {
             return res.status(400).json({ success: false, message: "Email or password are wrong" });
         }
@@ -55,22 +57,22 @@ export const recruiterLogin = async (req, res) => {
         }
 
         const tokenData = {
-            userId:user._id
+            userId: user._id
         }
 
-        const token = await jwt.sign(tokenData,process.env.SECRET_KEY,{expiresIn: '1d'});
+        const token = await jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: '1d' });
 
         // Remove the password 
         const userWithoutPassword = user.toObject();
         delete userWithoutPassword.password;
 
         return res.status(200).json({    //.cookie("token",token,{maxAge:1*24*60*60*1000, httpsOnly:true, sameSite:"strict"})  
-            success:true,
-            message:`Welcome Back ${user.companyName}`,
+            success: true,
+            message: `Welcome Back ${user.companyName}`,
             user: userWithoutPassword,
             token
-         })
-      
+        })
+
 
     } catch (error) {
         console.log("Error:", error);
@@ -80,11 +82,11 @@ export const recruiterLogin = async (req, res) => {
 // LogOut recruiter
 export const recruiterlogout = async (req, res) => {
     try {
-        return res.status(200).cookie("token","",{maxage:0}).json({
+        return res.status(200).cookie("token", "", { maxage: 0 }).json({
             success: true,
             message: "Successfully logged out."
         });
-        
+
     } catch (error) {
         console.log("Error:", error);
         return res.status(500).json({ success: false, message: "Server error. Please try again later." });
@@ -103,8 +105,17 @@ export const getJobsByRecruiter = async (req, res) => {
             });
         }
 
-        const jobs = await Job.find({ recruiter_id: recruiterId });
+        // Recruiter se company details fetch karna
+        const recruiterData = await recruiter.findById(recruiterId).select('companyName companyLogo');
+        if (!recruiterData) {
+            return res.status(404).json({
+                success: false,
+                message: "Recruiter not found."
+            });
+        }
 
+        // Jobs fetch karna
+        const jobs = await Job.find({ recruiter_id: recruiterId });
         if (!jobs || jobs.length === 0) {
             return res.status(200).json({
                 success: true,
@@ -113,11 +124,25 @@ export const getJobsByRecruiter = async (req, res) => {
             });
         }
 
+        // Jobs ka array banaye with company details
+        const jobsList = jobs.map(job => ({
+            company: {
+                companyName: recruiterData.companyName,
+                companyLogo: recruiterData.companyLogo
+            },
+            id: job._id,
+            title: job.title,
+            description: job.description,
+            recruiter_id: job.recruiter_id,
+        }));
+
+        // Response with jobs object
         return res.status(200).json({
             success: true,
             message: `Successfully retrieved ${jobs.length} job(s) created by the recruiter.`,
-            jobs
+            jobs: jobsList
         });
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({
