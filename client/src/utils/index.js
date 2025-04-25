@@ -15,8 +15,6 @@ const dateToString = (date) => {
     return `${months[givenDate.getMonth()]} ${givenDate.getDate()}, ${givenDate.getFullYear()}`;
 }
 
-
-
 const isObjectEmpty = (obj) => {
     if (Object.keys(obj).length === 0) {
         return true;

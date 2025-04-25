@@ -12,7 +12,6 @@ import LandingPage from "./LandingPage";
 
 
 
-
 export {
     CandidateLoginPage,
     CandidateRegistrationPage,

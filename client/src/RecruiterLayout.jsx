@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import { assets } from "./assets/assets";
 import { Footer } from "./components";
 
+
 function RecruiterLayout(){
     const {role, isLoggedIn} = useSelector((state)=>state.auth)
     const navigate = useNavigate();
@@ -19,11 +20,12 @@ function RecruiterLayout(){
             toast.error("Something went wrong... Please try again !",toastOptions);
             navigate("/")
         }
-    })
+    },[])
     return (
         <>
        {/* <h1>
             Recruiter - Landing Page
+<<<<<<< HEAD
             {isLoggedIn?<button onClick={()=>dispatch(logout())}>Logout</button>:<></>}
             
        </h1> */}

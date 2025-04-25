@@ -20,7 +20,6 @@ import {
 import AuthLayout from './AuthLayout.jsx';
 import { store } from './store/store.js';
 import {Provider} from 'react-redux';
-import { toastOptions } from './utils/index.js';
 import RecruiterLayout from './RecruiterLayout.jsx';
 import {JobCard,JobFilterOptions,JobListings, JobTitleBanner, SearchBanner, SearchBox} from './components';
 

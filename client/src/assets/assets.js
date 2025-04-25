@@ -39,6 +39,7 @@ import bin_icon from './bin_icon.svg'
 import delete_icon from './delete_icon.svg'
 import edit_icon_with_underline from './edit-icon-with-underline.svg'
 
+
 export const assets = {
     logo,
     search_icon,
@@ -80,6 +81,7 @@ export const assets = {
     show_password_icon,
     bin_icon,
     edit_icon_with_underline
+
 }
 
 export const JobCategories = [
