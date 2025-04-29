@@ -8,23 +8,30 @@ import {
   RecruiterLoginPage,
   RecruiterRegistrationPage,
   CandidateLoginPage,
-  CandidateRegistrationPage
-
+  CandidateRegistrationPage,
+  AddJobPage,
+  ManageJobsPage,
+  ViewApplicationPage,
+  UploadCompanyLogoPage,
+  JobDetailViewPage,
+  JobEditPage,
+  LandingPage
 } from "./pages"
 import AuthLayout from './AuthLayout.jsx';
 import { store } from './store/store.js';
 import {Provider} from 'react-redux';
 import RecruiterLayout from './RecruiterLayout.jsx';
-
+import {JobCard,JobFilterOptions,JobListings, JobTitleBanner, SearchBanner, SearchBox} from './components';
 
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-    <BrowserRouter>
+        <BrowserRouter>
       <Routes>
-        <Route index element={<AppLayout/>}>
+        <Route path='/' element={<AppLayout/>}>
+          <Route index element={<LandingPage/>} />
         </Route>
         <Route element={<AuthLayout/>}>
           <Route path="user-login" element={<CandidateLoginPage/>}/>
@@ -32,10 +39,17 @@ createRoot(document.getElementById('root')).render(
           <Route path="recruiter-login" element={<RecruiterLoginPage/>}/>
           <Route path="recruiter-registration" element={<RecruiterRegistrationPage/>}/>
         </Route>
-        <Route path="/recruiter-dashboard" element={<RecruiterLayout/>}/>
-
+        <Route path='/view-job/:jobId' element={<JobDetailViewPage/>}/>
+        <Route path="/recruiter-dashboard" element={<RecruiterLayout/>}>
+          <Route index path='add-job' element={<AddJobPage/>}/>
+          <Route path='manage-jobs' element={<ManageJobsPage/>}/>
+          <Route path='edit-job/:jobId' element={<JobEditPage/>}/>
+          <Route path='view-applications' element={<ViewApplicationPage/>}/>
+          
+        </Route>
+        <Route path='test' element={<JobFilterOptions/>}/>
       </Routes>
-    </BrowserRouter>
+        </BrowserRouter>
     </Provider>
     <ToastContainer/>
   </StrictMode>,

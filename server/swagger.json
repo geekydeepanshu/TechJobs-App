@@ -1,0 +1,267 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tech Jobs Management API",
+    "version": "1.0.0",
+    "description": "API documentation for the tech jobs management platform"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Local Development Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authentication APIs"
+    },
+    {
+      "name": "Create Job",
+      "description": "Job management APIs"
+    }
+  ],
+  "paths": {
+    "/api/user/signup": {
+      "post": {
+        "summary": "Register a new user",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstname": { "type": "string" },
+                  "lastname": { "type": "string" },
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "User registered successfully" },
+          "400": { "description": "Validation error" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/user/login": {
+      "post": {
+        "summary": "Login a user",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login successful" },
+          "401": { "description": "Invalid credentials" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/user/logout": {
+      "post": {
+        "summary": "Logout a user",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Logout successful" }
+        }
+      }
+    },
+    "/api/recruiter/signup": {
+      "post": {
+        "summary": "Register a recruiter",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "CompanyName": { "type": "string" },
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Recruiter registered successfully" },
+          "400": { "description": "Validation error" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/recruiter/login": {
+      "post": {
+        "summary": "Login recruiter",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Recruiter login successfully" },
+          "400": { "description": "Validation error" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/recruiter/logout": {
+      "post": {
+        "summary": "Logout recruiter",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Recruiter logout successfully" },
+          "400": { "description": "Validation error" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/job/create": {
+      "post": {
+        "summary": "Create a new job post",
+        "tags": ["Create Job"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { 
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "category": {"type":"string"},
+                  "location": { "type": "string" },
+                  "salary": { "type": "string" },
+                  "level": {"type":"string"}
+                },
+                "required": ["title", "description", "location", "salary"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Job created successfully" },
+          "400": { "description": "Validation error" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/job/getall": {
+      "get": {
+        "summary": "Get all job posts",
+        "tags": ["Create Job"],
+        "responses": {
+          "200": { "description": "Job posts fetched successfully" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/job/update/{id}": {
+      "put": {
+        "summary": "Update an existing job post",
+        "tags": ["Create Job"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "location": { "type": "string" },
+                  "salary": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Job updated successfully" },
+          "400": { "description": "Validation error" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/job/delete/{id}": {
+      "delete": {
+        "summary": "Delete a job post",
+        "tags": ["Create Job"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Job deleted successfully" },
+          "400": { "description": "Validation error" },
+          "500": { "description": "Server error" }
+        }
+      }
+    }
+  }
+}

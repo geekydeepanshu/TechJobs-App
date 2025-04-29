@@ -1,8 +1,11 @@
 # Default reviewers for all files
+
 * @geekydeepanshu @Abhishek9812  @NIKHIL8057
+
 
 # Specific reviewers for backend files
 server/** @Abhishek9812 @geekydeepanshu
 
 # Specific reviewers for frontend files
 client/** @Abhishek9812 @NIKHIL8057
+

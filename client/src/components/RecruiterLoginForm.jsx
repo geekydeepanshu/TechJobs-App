@@ -30,7 +30,7 @@ function RecruiterLogicForm(){
                 console.log(response);
                 dispatch(login({role:response.data?.user?.role, userInfo:response.data?.user, token:response.data?.token}))
                 toast.success(response.data.message,toastOptions);
-                navigate("/recruiter-dashboard");
+                navigate("/recruiter-dashboard/add-job");
             }
             } 
         catch (error) 
@@ -39,7 +39,7 @@ function RecruiterLogicForm(){
                 if(error.status>=400 && error.status<=499)
                     toast.error(error.response?.data?.message,toastOptions);
                 else
-                    toast.error(error.message);
+                    toast.error(error.response?.data?.message || error.message,toastOptions);
             }
      
         
