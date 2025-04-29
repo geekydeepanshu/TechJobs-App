@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
-
 .page-wrapper{
     @apply  w-screen h-screen flex items-center justify-center bg-white dark:bg-gray-900 px-4 sm:px-6 lg:px-8;
 }
 
 .form-wrapper{
-    @apply mx-auto max-w-md   w-full border-[1.5px] rounded-2xl px-8 py-6  shadow-sm border-black  bg-white box-border;
+    @apply mx-auto max-w-md w-full border-[1.5px] rounded-2xl px-8 py-6  shadow-sm border-black  bg-white box-border;
 }
 .heading-container{
     @apply mb-4;
